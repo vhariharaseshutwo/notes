@@ -1,0 +1,316 @@
+0) Git is universal, shells are not.
+   working directory is where files will be stored this directory will be where .git will exist('seshu git') its basically
+set of files that .git is not aware of  [untracked - they are not yet tracked by git]
+|
+we then take snapshot of it (add) [staged]
+|
+when we commit (all the commits are stored in a file = this is called repository )[commited]
+
+
+echo "Hello" > file.txt #WRITING OVER IT
+echo "hello" >> file.txt #APPENDING IT
+
+WORKFLOW
+
+1. Main branch - central branch, typically holds production-ready code
+
+2. Feature branches - created from main for different areas (frontend, backend, database, deployment)
+
+5. Multiple devs on same branch - causes problems
+   Need to constantly pull others' changes
+   Risk of merge conflicts
+   Pushes can fail if branch is behind
+
+6. Solution: Personal sub-branches - each developer creates their own branch
+   Work independently without conflicts
+   Make multiple commits freely
+   Open PR to merge back to parent branch when done
+
+4. Hierarchical branching - branches can have sub-branches
+   Example: main -> backend -> backend-auth -> backend-auth-login
+
+3. OPEN Pull Request (PR) - request to merge one branch into another (not just into main)
+   Allows code review before merging
+   Team discusses, comments, requests changes, then approves
+   Works between any two branches
+
+7. Typical flow:
+   Create personal branch from feature branch
+   Work and commit
+   Push to remote
+   Open PR for review
+   After approval, merge to parent branch
+   Repeat at each level until changes reach main
+
+8. Key principle - one person or one feature equals one branch, merge when ready
+
+
+
+============================================================================================================
+1)git status tells you the current state of a Git repository — and if it errors, it means the folder is NOT a Git repo.
+
+2)git config is used to set and read Git’s configuration—who you are, how Git behaves, and how a repo is set up.
+Author name & email (required for commits)
+Default editor
+Line endings behavior
+Aliases (shortcuts)
+Merge / diff behavior etc
+it can store these settings in three different places: system level(every repo, every user,[COMPANY WIDE RULES]), GLOBALLEVEL [IT ONLY FOR YOU,ACROSS ALL THE REPOS], LOCALLEVEL(ONLY onerepo)
+
+local  >  global  >  system
+When Git needs a value (say user.email), it chekcs 3 different repo's:
+
+“I’ll look in the repo config.
+If not found, I’ll look in the user config.
+If not found, I’ll look in the system config.”
+That’s all “priority” means.
+
+you need to run git config at the begginging to know who made the change and how to  contact them
+git config --global user.email "vhariharaseshu@gmail.com" [ every new repo i make in my pc it will use this info ]
+git config --global user.name "seshu"
+
+as i configued and initilized it, i got something like this from git "“This folder is on a filesystem where I can’t reliably tell who owns it,so I’m stopping to protect you.”
+so i did = " git config --global --add safe.directory "F:/seshu git" == i trust this directory its mine.
+git config --global --unset-all safe.directory
+git config --global --add safe.directory "F:/seshu git"
+git config --global --list
+
+
+3. git init = a git-repo is initilized in your folder now its called a git repository.
+Your current branch is named master :master is just the default branch name that Git creates when you run git init.
+HEAD is pointing to master
+This is the default branch Git created
+Nothing fancy — just your current branch name.
+
+4. git branch - It shows all the branches,
+Git creates a default branch (`master`) as soon as you initialize a repository, even before any commits exist. However, until at least one commit is made, that branch does not point to any commit, so VS Code may choose not to display it in the branch list. Once you make your first commit, the branch points to a real commit and VS Code shows it normally.
+
+THE MAIN/MASTER BRANCH IS WHAT IS CREATED, FROM WHICH EVERYTHING STARTS -> WHICH CAN BE RENAMED TO WEBDEV.
+WE CREATE BRANCHES UPON MAIN BRANCH CALLED FRONTEND,BACKEND,SQL NOTE THERE IS NO FUCKING HIREACY / OR DIVISION EVERYTHING IS ON SAME LEVEL
+
+<PHOTO>
+
+UNDER EACH BRANCH WE WORK INDEPENDENTLY, WE COMMIT INITILIZE FILE UPON WHICH FURHTER MANY COMMITS ARE MADE:
+    1>OPEN PR > MAKE CHANGES > AND MERGE.
+AND THE FINAL COMMITS OF [FRONT END, BACKEND, SQL] ARE MERGED TO THE MAIN BRANCHES' COMMIT.
+
+HEAD = IS WHERE YOUR CURRENTLY WORKING ON, BY DEFAULT FROM THIS POINT WHERE BRANCHES ARE MADE, IT CAN BE MADE WITH EARLIER COMIT.
+NOTE: ITS USER SPECIFIC LIKE THERE ARE 1000 GUYS WORKING ON WEBDEV, AND EACH HAVE THERE OWN HEAD.
+
+Can branches exist without an initial commit?
+No.
+In Git, a branch is a pointer to a commit.
+If there is no commit, there is nothing to point to.
+So technically, branches cannot exist before the first commit.
+
+the starting commit is called the initial commit, by convention it is stores as "README.MD".
+
+4)git add <file name> or git add . ( for all the files )
+
+git add tells Git: “I want this file (or these changes) to be included in the next commit.”
+It moves changes from your working directory into the staging area.
+Nothing is saved permanently yet.
+You can stage some files and ignore others.
+Think of it as selecting what you’re about to save. // it dosn't care who the author is you can just run the command without even specifying author.BUT GIT COMMIT WON'T RUN WITHOUT AUTHOR.
+
+5)git commit
+
+git commit tells Git: “Save the staged changes as a snapshot.”
+It creates a new commit with a unique ID and message.
+This snapshot becomes part of the project’s history.
+After commit, the staging area is cleared.
+A commit is permanent (unless you intentionally rewrite history).
+
+UNTRACKED -> MODIFIED (if we further make change add it and commit it)
+
+when we create a new files, the files are untracked
+then once we add and commit they apear in history or branches
+eg readmd was created then 2 files were created in working directory then one file was taken ie add and comit
+now by git status we can see that 2 commits c0(readmd)->c1(readmd,file1) and one untracked file.
+
+
+*co(readmd)->c1(file1) -> c2(file2,file3,file4) //now at c2 it will one message for all the 3 as we have bundeled.[git add .]
+
+*when you do some changed on file1 "M" icon will appear right next to it.
+now git add.
+git commit -m " "
+
+
+6) GIT LOGS - git log = shows the complete history of commits in the current Git repository, ordered from newest to oldest. It displays who made each commit, when it was made, the commit message, and the unique commit hash, helping you understand how the project evolved over time and allowing you to inspect or reference past states.
+
+Common parameters
+git log --oneline = shows each commit in a single short line (hash + message)
+git log -n 3 = shows only the last 3 commits
+git log --stat = shows which files changed in each commit
+git log --author="name" = shows commits by a specific author
+git log -- file.txt = shows commits that affected a specific file
+git --no-pager log = shows log without opening the (END) screen
+
+7) git ignore = a mechanism in Git using the .gitignore file to specify files and folders (like create two file api_key.txt, .env file and now create a.gitgnore files and put these 2 files inside .gitignore file then add and commit) that should excluded from version control. 
+Ignored files can be freely created, opened, edited, and used by the application, but Git will not track, stage, or commit them, so they remain local-only and never enter the repository history.
+
+create two files ( .env and file.txt { there are something that does not want to be changed }, after creating .gitignore file=> put the name of .env and file.txt inside that" and now press git status only file not yet commited will be-> gitignore
+
+1. Create the files you want to ignore.
+(You create .env and file1.txt just like normal files.)
+2. Create a new file named .gitignore.
+(This is the special list file.)
+3. Open the .gitignore file and type the names of the files from step 1 inside it.
+(Type .env on the first line and file1.txt on the second line. Save the file.)
+4. Commit ONLY the .gitignore file. q
+(When you go to save your changes to Git, you will see that .env and file1.txt have disappeared from the list. The only thing left to save is the .gitignore file itself. Save/Commit that file.)
+Result: The .gitignore file goes to GitHub, but the other two files stay secretly on your computer forever.
+
+******WHY WE USE GITIGNORE**** 
+Clutter (Local Benefit): It keeps your git status clean. You don't see hundreds of junk files every time you check what work you have done.
+Ignored while Pushing (Remote Benefit): It stops those files from ever being uploaded to GitHub. This saves time and bandwidth because you aren't uploading massive files or useless junk.
+
+if you commited them put them in gitignore 
+Your secrets are exposed Since you committed .env, it is now permanently recorded in your project's history. Even if you fix it later, anyone who looks at the "history" of your project can go back to that specific commit and read your secrets.
+*********
+
+//when you create a folder
+seshu git
+ 	|_.git
+ 	|_file1.txt
+ 	|_file2.txt
+ 	|_folder/ < after you create this and press git status > ==> it won't show one folder untracked because GIT DOES NOT TRACK <EMPTY FOLDER> so you have to put some data in it.
+
+BUT THERE IS SOLUTION FOR EVEN TRACKING EMPTY FOLDER WE JUST NEED TO Add "**.gitkeep" file (its an empty file)**on the empty folder.
+
+---
+Q> Add 2 files in .gitigonore then later create a new folder and then add it also create a empty folder and try to track it.?
+---
+
+==================================WHAT'S ACTUALLY HAPPENING IN EACH COMMMIT=======================================
+c0 – Initial project structure
+
+```
+my_web_app/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   └── routes.py
+├── templates/
+│   └── index.html
+├── static/
+│   └── style.css
+├── run.py
+└── README.md
+```
+
+Modification
+Only app/routes.py is changed (content updated)
+
+Case 1: add everything
+git add .
+git commit -m "update routes```
+All changes are staged, but the commit still stores a full snapshot of the project.
+Case 2: add only one file
+git add app/routes.py
+git commit -m "update routes"
+Only routes.py is staged, but the commit still stores a full snapshot of the project.
+
+c1 – Project structure (same in both cases)
+my_web_app/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   └── routes.py
+├── templates/
+│   └── index.html
+├── static/
+│   └── style.css
+├── run.py
+└── README.md
+=========================================codeshare.io====================================================
+
+git branch -a //SHOWS ALL BRANCHES LOCAL AND REMOTE
+git branch <new-branch-name>
+git checkout -b branch_name OR git switch -c branch_name //Create and switch to the new branch (most used)
+git switch branch_name or git checkout branch_name // switch branches
+
+//checks out commits
+7)continuation on6th {
+   git log -oneline [ shows the entire history ]
+   git log branch_name
+   git log -n 5
+}(git log branch_name -n 5 --oneline)
+
+//goes to that commit and looks
+git checkout <commit_hash>
+
+============================================================================================
+
+https://vhariharaseshutwo.github.io/webdev/
+so we have something called github pages which lets us host our static webpages
+create a reposityary => go to respositary's setting => pages {deploy from branch, select your branch, select your folder(/root for main folder) }
+also you have your custom domain mapped to it, but for that you need to buy it from godaddy and do the process of maping, so now you can have "vhariharaseshu.com". 
+-----
+git clone https://github.com/username/repository-name.gi
+git clone "url" { when i do this git will automatically be initlized}
+// DANGER => IF YOU DON'T USE THE PUSH METHOD TO UPLOAD THE GITHUB {IT MIGHT EVEN UP
+
+mv * .. [ mv means move, * for everything, .. one level up]
+mv .* .. [ this is used for also including the hidden folder like .git .env to move]
+rm -rf webdev [rm stand for remove, -rf where r = recursively ( all the contens within the folder subfolders, photoes everything),f = force ( no confromation )]
+
+ls -a {list all the files and hidden files } // byremoving the .git we will unitilize the file 
+LOAD THE HIDDEN .GIT FOLDER WHICH WE DON'T WANT SO}
+touch = The Container. (I just need the box, I'll put stuff in it later.)
+echo = The Content. (I have something to say right now, so make the box and put this in it.)
+
+
+to add git hub
+-git remote add seshu https://github.com/USERNAME/REPO_NAME.git
+git remote add hari   https://github.com/user/main-repo.git
+git remote add hara   https://github.com/user/backup-repo.git
+git remote add dds    https://gitlab.com/user/mirror-repo.git
+git remote add jjk    https://bitbucket.org/user/test-repo.git
+
+
+git remote -v // shows the GitHub places where I can upload
+seshu  https://github.com/USERNAME/REPO_NAME.git (fetch)
+seshu  https://github.com/USERNAME/REPO_NAME.git (push)
+
+hari   https://github.com/user/main-repo.git (fetch)
+hari   https://github.com/user/main-repo.git (push)
+.
+.
+.
+
+push
+if its a first commit of the branch
+git push -u <REMOTE_NAME> <BRANCH_NAME>
+eg-git push -u seshu master
+for later commits I can just git commit
+then I create a frontend branch
+so now gitpush -u  seshu frontend
+git commit ( this will go to frontend branch)
+
+git push <REMOTE_NAME> <BRANCH_NAME>
+
+pull
+git pull <REMOTE_NAME> <BRANCH_NAME
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
