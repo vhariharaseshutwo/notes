@@ -300,6 +300,16 @@ git push <REMOTE_NAME> <BRANCH_NAME>
 pull
 git pull <REMOTE_NAME> <BRANCH_NAME
 
+
+POSSIBLE WORKFLOW
+ Repo has only backend, frontend, ml
+ Developer finishes a feature locally
+ Developer pushes to THEIR forked copy or temporary branch
+ Opens PR → backend / frontend / ml
+ PR is reviewed (even by one person)
+ Merge happens 
+ Shared branch stays stable
+
 👌git push personal --all  [THIS WILL PUSH EVERYTHING ALL THE BRANCHES AND COMMITS]
 
 
