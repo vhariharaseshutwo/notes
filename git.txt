@@ -227,8 +227,11 @@ my_web_app/
 
 git branch -a //SHOWS ALL BRANCHES LOCAL AND REMOTE
 git branch <new-branch-name>
-git checkout -b branch_name OR git switch -c branch_name //Create and switch to the new branch (most used)
 git switch branch_name or git checkout branch_name // switch branches
+git checkout -b branch_name OR git switch -c branch_name //Create and switch to the new branch (most used)
+
+//if you went to commit c0 and want to come  back to comit c4(current commit ) just [git checkout branch <the branch i am on> ]  :}
+
 
 //checks out commits
 7)continuation on6th {
@@ -249,7 +252,8 @@ also you have your custom domain mapped to it, but for that you need to buy it f
 -----
 git clone https://github.com/username/repository-name.gi
 git clone "url" { when i do this git will automatically be initlized}
-// DANGER => IF YOU DON'T USE THE PUSH METHOD TO UPLOAD THE GITHUB {IT MIGHT EVEN UP
+git clone https://github.com/pjasicek/OpenClaw.git . [USE THIS WHEN YOU WANT IT IN THE FOLDER ITSELF NOT IN THE SUBFOLDER]
+// DANGER => IF YOU DON'T USE THE PUSH METHOD TO UPLOAD THE GITHUB {IT MIGHT EVEN add the .git file }
 
 mv * .. [ mv means move, * for everything, .. one level up]
 mv .* .. [ this is used for also including the hidden folder like .git .env to move]
@@ -260,10 +264,9 @@ LOAD THE HIDDEN .GIT FOLDER WHICH WE DON'T WANT SO}
 touch = The Container. (I just need the box, I'll put stuff in it later.)
 echo = The Content. (I have something to say right now, so make the box and put this in it.)
 
-
-to add git hub
+to add git hub accounts
 -git remote add seshu https://github.com/USERNAME/REPO_NAME.git
-git remote add hari   https://github.com/user/main-repo.git
+ 
 git remote add hara   https://github.com/user/backup-repo.git
 git remote add dds    https://gitlab.com/user/mirror-repo.git
 git remote add jjk    https://bitbucket.org/user/test-repo.git
@@ -278,7 +281,10 @@ hari   https://github.com/user/main-repo.git (push)
 .
 .
 .
-
+																											NOTE : WHEREEVER HEAD IS ON COMMIT/BRANCH ONLY THAT GETS PUSHED.
+                                                      
+                                                      The Code You See (The Files): Yes, when you look at the files on the GitHub website, you will see the latest version (Commit #5).
+																											The History (The "Time Machine"): Git will also silently upload Commits #1, #2, #3, and #4 in the background BUT NOT BRANCH :)
 push
 if its a first commit of the branch
 git push -u <REMOTE_NAME> <BRANCH_NAME>
@@ -286,31 +292,25 @@ eg-git push -u seshu master
 for later commits I can just git commit
 then I create a frontend branch
 so now gitpush -u  seshu frontend
-git commit ( this will go to frontend branch)
+git commit ( this will go to frontend branch) 
+																															-u tells remeber this connection for later use.It Remembers: It tells Git, "From now on, if I am on the main branch and I type just git push, send it to personal automatically."
 
 git push <REMOTE_NAME> <BRANCH_NAME>
 
 pull
 git pull <REMOTE_NAME> <BRANCH_NAME
 
+👌git push personal --all  [THIS WILL PUSH EVERYTHING ALL THE BRANCHES AND COMMITS]
 
 
 
+🫨so what what happend in https://github.com/vhariharaseshutwo/project/
+SO BASICALLY I CLONED 
+WHEN I CLONED, MY CONFIG WAS SET TO THE THE PERSON I CLONED TO - MAYBE BECAUSE I DIDN'T SET ANY CONFIG LIKE USER NAME OR EMAIL
+AND I STARTED DOING ALL THOSE COMMIT  AND THEN LATER CHANED THE USER NAME AND EMAIL THEN I COMMITED AGAIN 
+SO THE FIRST 5 COMMITS WHERE I DIDN'T SET MY USERNAME SO IT WAS SET TO DEAFULT (WHICH WAS GAT585 )
+THEN I CHANGED THE USER NAME MADE OTHER COMMIT SO TWO DIFFRENT USER WAS SET IN GIT HUB
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+::::NOW CHECK OUT HOW TO NAVIGATE THROUGH BRANCHES AND AND UPLOADING AND EVERYGHING AND ALSO FIND MORE ABOUT '🫨so what what happend in https://github.com/vhariharaseshutwo/project/'
+	
